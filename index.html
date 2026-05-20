@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BSOFT Technologies – Formações</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0A84FF;
+    --blue-dark: #0055CC;
+    --gold: #F5A623;
+    --bg: #050D1A;
+    --card: #0B1929;
+    --card2: #0D2040;
+    --white: #FFFFFF;
+    --muted: #8AAAC8;
+    --new: #00E5A0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Outfit', sans-serif;
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px 80px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 30%, #0A3A7A55 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 80% 70%, #0055CC22 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(10,132,255,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(10,132,255,.07) 1px, transparent 1px);
+    background-size: 48px 48px;
+    animation: gridMove 20s linear infinite;
+  }
+  @keyframes gridMove { from { transform: translateY(0); } to { transform: translateY(48px); } }
+
+  .brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 6px;
+    color: var(--blue);
+    margin-bottom: 28px;
+    animation: fadeUp .6s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    line-height: 1.1;
+    letter-spacing: 2px;
+    animation: fadeUp .7s .1s ease both;
+  }
+
+  .hero h1 .static-line { display: block; }
+
+  /* Typewriter */
+  .typewriter-wrap {
+    display: block;
+    color: var(--blue);
+    min-height: 1.15em;
+  }
+  #typewriter-text {
+    border-right: 3px solid var(--blue);
+    padding-right: 4px;
+    animation: blink-caret .75s step-end infinite;
+  }
+  @keyframes blink-caret {
+    0%, 100% { border-color: var(--blue); }
+    50%       { border-color: transparent; }
+  }
+
+  .hero p.sub {
+    margin-top: 20px;
+    font-size: clamp(.95rem, 2.5vw, 1.15rem);
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.65;
+    font-weight: 300;
+    animation: fadeUp .7s .2s ease both;
+  }
+
+  .hero p.sub strong { color: var(--white); font-weight: 600; }
+
+  .cta-btn {
+    display: inline-block;
+    margin-top: 36px;
+    padding: 16px 44px;
+    background: var(--blue);
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+    animation: fadeUp .7s .3s ease both;
+  }
+  .cta-btn:hover { background: var(--blue-dark); transform: translateY(-2px); }
+
+  /* ── SECTION TITLE ── */
+  .section-label {
+    text-align: center;
+    padding: 64px 24px 12px;
+  }
+  .section-label h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: 2px;
+  }
+  .section-label h2 span { color: var(--blue); }
+  .section-label p { color: var(--muted); font-size: .95rem; margin-top: 8px; }
+
+  /* ── COURSES GRID ── */
+  .courses {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 32px auto 0;
+    padding: 0 24px 80px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid #1A2E48;
+    border-radius: 12px;
+    padding: 28px 24px 20px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform .25s, border-color .25s, box-shadow .25s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: var(--blue);
+    box-shadow: 0 12px 40px #0A84FF18;
+  }
+  .card.new-course {
+    border-color: var(--new);
+    background: linear-gradient(135deg, #0B1929 60%, #01251A 100%);
+  }
+  .card.new-course:hover { border-color: var(--new); box-shadow: 0 12px 40px #00E5A018; }
+
+  .badge-new {
+    position: absolute;
+    top: 14px; right: 14px;
+    background: var(--new);
+    color: #000;
+    font-size: .65rem;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 #00E5A044; }
+    50%      { box-shadow: 0 0 0 8px #00E5A000; }
+  }
+
+  .card-icon { font-size: 2rem; margin-bottom: 14px; color: var(--blue); }
+  .card.new-course .card-icon { color: var(--new); }
+
+  .card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.55rem;
+    letter-spacing: 1px;
+    line-height: 1.1;
+  }
+  .card.new-course h3 { color: var(--new); }
+
+  .card .tagline {
+    font-size: .82rem;
+    color: var(--muted);
+    margin-top: 6px;
+    line-height: 1.5;
+    font-weight: 300;
+    flex-grow: 1;
+  }
+
+  .modules {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .mod-tag {
+    background: #0D2040;
+    border: 1px solid #1E3A58;
+    border-radius: 20px;
+    font-size: .72rem;
+    padding: 3px 10px;
+    color: #8AAAC8;
+  }
+  .card.new-course .mod-tag { background: #012018; border-color: #025A34; color: #5CE8B4; }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid #1A2E48;
+  }
+  .price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+  .duration { font-size: .78rem; color: var(--muted); }
+
+  /* ── SABER MAIS BUTTON ── */
+  .btn-saber {
+    margin-top: 16px;
+    width: 100%;
+    padding: 11px 0;
+    background: transparent;
+    border: 1px solid #1E3A58;
+    border-radius: 6px;
+    color: var(--muted);
+    font-family: 'Outfit', sans-serif;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s, border-color .2s, color .2s;
+    letter-spacing: .5px;
+  }
+  .btn-saber:hover { background: #0A84FF14; border-color: var(--blue); color: var(--blue); }
+  .card.new-course .btn-saber:hover { background: #00E5A014; border-color: var(--new); color: var(--new); }
+
+  /* ── WHY SECTION ── */
+  .why {
+    background: var(--card2);
+    border-top: 1px solid #1A2E48;
+    border-bottom: 1px solid #1A2E48;
+    padding: 60px 24px;
+    text-align: center;
+  }
+  .why h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    letter-spacing: 2px;
+    margin-bottom: 32px;
+  }
+  .why h2 span { color: var(--blue); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .why-item { padding: 8px; }
+  .why-icon { font-size: 2rem; margin-bottom: 10px; color: var(--blue); }
+  .why-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+  .why-item p { font-size: .85rem; color: var(--muted); line-height: 1.55; }
+
+  /* ── FOOTER ── */
+  footer { padding: 48px 24px; text-align: center; }
+  footer .logo-txt {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 4px;
+    color: var(--blue);
+    margin-bottom: 6px;
+  }
+  footer .motto { font-size: .8rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+  footer .contacts {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    font-size: .9rem;
+    color: var(--muted);
+  }
+  footer .contacts a { color: var(--white); text-decoration: none; }
+  footer .contacts a:hover { color: var(--blue); }
+  footer .cta-final { margin-top: 30px; font-size: 1rem; color: var(--muted); }
+  footer .cta-final strong { color: var(--white); }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(5, 13, 26, 0.88);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: #0B1929;
+    border: 1px solid #1A2E48;
+    border-radius: 16px;
+    max-width: 680px;
+    width: 100%;
+    max-height: 88vh;
+    overflow-y: auto;
+    transform: translateY(24px) scale(.97);
+    transition: transform .35s cubic-bezier(.22,1,.36,1);
+    scrollbar-width: thin;
+    scrollbar-color: #1A2E48 transparent;
+  }
+  .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+
+  .modal.is-new { border-color: var(--new); }
+
+  .modal-header {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid #1A2E48;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    background: #0B1929;
+    z-index: 2;
+    border-radius: 16px 16px 0 0;
+  }
+  .modal.is-new .modal-header { background: #09201A; }
+
+  .modal-header-left { display: flex; flex-direction: column; gap: 4px; }
+  .modal-emoji { font-size: 2rem; color: var(--blue); }
+  .modal.is-new .modal-emoji { color: var(--new); }
+  .modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .modal.is-new .modal-title { color: var(--new); }
+
+  .modal-subtitle { font-size: .82rem; color: var(--muted); margin-top: 2px; }
+
+  .modal-close {
+    background: #0D2040;
+    border: 1px solid #1E3A58;
+    color: var(--muted);
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s, color .2s;
+    flex-shrink: 0;
+  }
+  .modal-close:hover { background: #1A2E48; color: #fff; }
+
+  .modal-body { padding: 24px 28px 28px; }
+
+  /* intro strip */
+  .modal-intro {
+    background: #0D2040;
+    border-radius: 10px;
+    padding: 16px 18px;
+    font-size: .9rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .modal-intro strong { color: #fff; }
+
+  /* info row */
+  .modal-info-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .info-chip {
+    background: #0D2040;
+    border: 1px solid #1E3A58;
+    border-radius: 8px;
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 120px;
+  }
+  .info-chip .ic-label { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .info-chip .ic-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; color: var(--gold); letter-spacing: .5px; }
+  .info-chip .ic-val.blue { color: var(--blue); }
+
+  /* modules detail */
+  .modules-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .module-item {
+    background: #0D2040;
+    border: 1px solid #1E3A58;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: border-color .2s;
+  }
+  .module-item:hover { border-color: var(--blue); }
+  .modal.is-new .module-item:hover { border-color: var(--new); }
+
+  .mod-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--blue);
+    line-height: 1;
+    min-width: 36px;
+  }
+  .modal.is-new .mod-num { color: var(--new); }
+
+  .mod-content h4 {
+    font-size: .95rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .mod-content p {
+    font-size: .82rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* tags in modal */
+  .modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 20px;
+  }
+  .modal-tag {
+    background: #0B1929;
+    border: 1px solid #1E3A58;
+    border-radius: 20px;
+    font-size: .75rem;
+    padding: 4px 12px;
+    color: var(--muted);
+  }
+
+  /* cta inside modal */
+  .modal-cta {
+    margin-top: 26px;
+    display: block;
+    width: 100%;
+    padding: 14px 0;
+    background: var(--blue);
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: .95rem;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background .2s, transform .15s;
+  }
+  .modal-cta:hover { background: var(--blue-dark); transform: translateY(-1px); }
+  .modal.is-new .modal-cta { background: var(--new); color: #000; }
+  .modal.is-new .modal-cta:hover { background: #00c98c; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* scrollbar */
+  .modal::-webkit-scrollbar { width: 5px; }
+  .modal::-webkit-scrollbar-track { background: transparent; }
+  .modal::-webkit-scrollbar-thumb { background: #1A2E48; border-radius: 10px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="grid-bg"></div>
+  <p class="brand">BSOFT TECHNOLOGIES</p>
+  <h1>
+    <span class="static-line">O Mercado de TI</span>
+    <span class="typewriter-wrap"><span id="typewriter-text"></span></span>
+  </h1>
+  <p class="sub">
+    Em Angola, quem sabe tecnologia <strong>não fica parado.</strong>
+    Formações práticas, presenciais e acessíveis — para quem quer sair do zero
+    e entrar de vez no mercado.
+  </p>
+  <a href="https://wa.me/244934314953" class="cta-btn">Garantir a minha vaga →</a>
+</section>
+
+<!-- CURSOS -->
+<div class="section-label">
+  <h2>As nossas <span>Formações</span></h2>
+  <p>2 meses • Aulas práticas e presenciais • Pagamento parcelado</p>
+</div>
+
+<div class="courses">
+
+  <!-- Redes de Computadores — NOVO -->
+  <div class="card new-course">
+    <span class="badge-new">✦ Novo</span>
+    <div class="card-icon"><i class="bi bi-hdd-network"></i></div>
+    <h3>Redes de Computadores</h3>
+    <p class="tagline">O profissional que instala, configura e mantém redes está em falta em Luanda. Seja você esse profissional.</p>
+    <div class="modules">
+      <span class="mod-tag">Fundamentos de Redes</span>
+      <span class="mod-tag">Cabeamento Estruturado</span>
+      <span class="mod-tag">Endereçamento IP</span>
+      <span class="mod-tag">Config. Prática</span>
+      <span class="mod-tag">Segurança de Redes</span>
+    </div>
+    <div class="card-footer">
+      <span class="price">40.000 KZ</span>
+      <span class="duration"><i class="bi bi-clock"></i> 2 meses</span>
+    </div>
+    <button class="btn-saber" onclick="openModal('redes')">Saber mais →</button>
+  </div>
+
+  <!-- Frontend -->
+  <div class="card">
+    <div class="card-icon"><i class="bi bi-code-slash"></i></div>
+    <h3>Programador Frontend</h3>
+    <p class="tagline">Cria sites e interfaces modernas do zero. HTML, CSS, JavaScript e muito mais.</p>
+    <div class="modules">
+      <span class="mod-tag">HTML5</span>
+      <span class="mod-tag">CSS3</span>
+      <span class="mod-tag">JavaScript</span>
+      <span class="mod-tag">Bootstrap</span>
+      <span class="mod-tag">Git & GitHub</span>
+    </div>
+    <div class="card-footer">
+      <span class="price">30.000 KZ</span>
+      <span class="duration"><i class="bi bi-clock"></i> 2 meses</span>
+    </div>
+    <button class="btn-saber" onclick="openModal('frontend')">Saber mais →</button>
+  </div>
+
+  <!-- Laravel -->
+  <div class="card">
+    <div class="card-icon"><i class="bi bi-gear-wide-connected"></i></div>
+    <h3>Laravel</h3>
+    <p class="tagline">Do básico ao avançado. Desenvolve aplicações web robustas e escaláveis com PHP + Laravel.</p>
+    <div class="modules">
+      <span class="mod-tag">PHP & Laravel</span>
+      <span class="mod-tag">Eloquent & Migrations</span>
+      <span class="mod-tag">Autenticação</span>
+      <span class="mod-tag">Projetos Reais</span>
+    </div>
+    <div class="card-footer">
+      <span class="price">40.000 KZ</span>
+      <span class="duration"><i class="bi bi-clock"></i> 2 meses</span>
+    </div>
+    <button class="btn-saber" onclick="openModal('laravel')">Saber mais →</button>
+  </div>
+
+  <!-- Base de Dados -->
+  <div class="card">
+    <div class="card-icon"><i class="bi bi-database"></i></div>
+    <h3>Base de Dados</h3>
+    <p class="tagline">Aprende a modelar, consultar e proteger bases de dados. SQL na prática, do início ao fim.</p>
+    <div class="modules">
+      <span class="mod-tag">Fundamentos BD</span>
+      <span class="mod-tag">Modelagem</span>
+      <span class="mod-tag">SQL & Consultas</span>
+      <span class="mod-tag">Normalização</span>
+      <span class="mod-tag">Backup & Segurança</span>
+    </div>
+    <div class="card-footer">
+      <span class="price">30.000 KZ</span>
+      <span class="duration"><i class="bi bi-clock"></i> 2 meses</span>
+    </div>
+    <button class="btn-saber" onclick="openModal('dados')">Saber mais →</button>
+  </div>
+
+  <!-- Informática -->
+  <div class="card">
+    <div class="card-icon"><i class="bi bi-pc-display"></i></div>
+    <h3>Informática na Óptica do Utilizador</h3>
+    <p class="tagline">Windows, Office, Google Docs e IA aplicada. O essencial para qualquer trabalho hoje em dia.</p>
+    <div class="modules">
+      <span class="mod-tag">Windows</span>
+      <span class="mod-tag">Word & Excel</span>
+      <span class="mod-tag">PowerPoint</span>
+      <span class="mod-tag">Google Docs</span>
+      <span class="mod-tag">Conceito de IA</span>
+    </div>
+    <div class="card-footer">
+      <span class="price">30.000 KZ</span>
+      <span class="duration"><i class="bi bi-clock"></i> 2 meses</span>
+    </div>
+    <button class="btn-saber" onclick="openModal('informatica')">Saber mais →</button>
+  </div>
+
+</div>
+
+<!-- WHY -->
+<section class="why">
+  <h2>Porque <span>BSOFT?</span></h2>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-icon"><i class="bi bi-people-fill"></i></div>
+      <h4>Ensino real</h4>
+      <p>Nada de teoria vazia. Aqui praticas desde o primeiro dia, com casos do mercado angolano.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-icon"><i class="bi bi-geo-alt-fill"></i></div>
+      <h4>Presencial em Luanda</h4>
+      <p>Benfica, Mundial Praça Nova. Estamos perto de ti, com ambiente de aprendizagem a sério.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-icon"><i class="bi bi-cash-coin"></i></div>
+      <h4>Pagamento parcelado</h4>
+      <p>Sem desculpas. Parcelamos para que o investimento caiba no teu bolso.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-icon"><i class="bi bi-rocket-takeoff-fill"></i></div>
+      <h4>Certificado + Portfólio</h4>
+      <p>Sais com prova do que sabes e projectos reais para mostrar a qualquer empregador.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo-txt">BSOFT</div>
+  <p class="motto">Aprenda. Pratique. Evolua.</p>
+  <div class="contacts">
+    <span><i class="bi bi-envelope-fill"></i> <a href="mailto:bsoft411@gmail.com">bsoft411@gmail.com</a></span>
+    <span><i class="bi bi-whatsapp"></i> <a href="https://wa.me/244934314953">934 314 953</a></span>
+    <span><i class="bi bi-whatsapp"></i> <a href="https://wa.me/244933509466">933 509 466</a></span>
+    <span><i class="bi bi-geo-alt-fill"></i> Benfica, Mundial Praça Nova</span>
+  </div>
+  <p class="cta-final" style="margin-top:32px;">
+    As vagas são limitadas.<br>
+    <strong>Fala connosco hoje e garante o teu lugar.</strong>
+  </p>
+</footer>
+
+<!-- ══════════════ MODAL ══════════════ -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modalBox">
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <span class="modal-emoji" id="mEmoji"></span>
+        <span class="modal-title" id="mTitle"></span>
+        <span class="modal-subtitle" id="mSubtitle"></span>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-intro" id="mIntro"></div>
+      <div class="modal-info-row" id="mInfoRow"></div>
+      <div class="modules-title">O QUE VAIS APRENDER</div>
+      <div id="mModules"></div>
+      <div class="modal-tags" id="mTags"></div>
+      <a href="https://wa.me/244934314953" class="modal-cta" target="_blank">Quero me inscrever no WhatsApp →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── TYPEWRITER ── */
+(function() {
+  const phrases = [
+    'não espera por ninguém.',
+    'precisa de ti agora.',
+    'está cheio de oportunidades.',
+    'começa com uma formação.',
+  ];
+  let pi = 0, ci = 0, deleting = false;
+  const el = document.getElementById('typewriter-text');
+
+  function tick() {
+    const phrase = phrases[pi];
+    if (!deleting) {
+      el.textContent = phrase.slice(0, ci + 1);
+      ci++;
+      if (ci === phrase.length) {
+        deleting = true;
+        setTimeout(tick, 1800);
+        return;
+      }
+      // small random jitter so it feels like a real person typing
+      const speed = 60 + Math.random() * 55;
+      setTimeout(tick, speed);
+    } else {
+      el.textContent = phrase.slice(0, ci - 1);
+      ci--;
+      if (ci === 0) {
+        deleting = false;
+        pi = (pi + 1) % phrases.length;
+        setTimeout(tick, 420);
+        return;
+      }
+      setTimeout(tick, 32 + Math.random() * 20);
+    }
+  }
+  setTimeout(tick, 900);
+})();
+
+/* ── COURSE DATA ── */
+const courses = {
+  redes: {
+    isNew: true,
+    icon: 'bi-hdd-network',
+    title: 'Redes de Computadores',
+    subtitle: 'Formação Completa — CCNA Ready',
+    intro: 'Em Luanda, cada empresa, escritório ou instituição depende de uma rede a funcionar. Mas <strong>profissionais capacitados são poucos</strong>. Esta formação prepara-te para instalar, configurar e manter redes com confiança — e entrares num dos mercados com mais demanda em Angola.',
+    preco: '40.000 KZ',
+    duracao: '2 Meses',
+    aulas: 'Práticas e presenciais',
+    modules: [
+      { num: '01', title: 'Fundamentos de Redes', desc: 'Como a internet funciona de verdade. Protocolos, modelos OSI e TCP/IP explicados sem complicação — desde o início.' },
+      { num: '02', title: 'Cabeamento Estruturado', desc: 'Aprende a montar e organizar cabos de rede de forma profissional. Ferramentas, normas e boas práticas do mercado.' },
+      { num: '03', title: 'Endereçamento IP', desc: 'IPv4, sub-redes, máscaras — tudo com exercícios práticos. Vais resolver os cenários que aparecem no dia-a-dia.' },
+      { num: '04', title: 'Configuração Prática', desc: 'Trabalhas com switches e routers de verdade. Configuração de VLANs, roteamento estático e muito mais.' },
+      { num: '05', title: 'Gerenciamento e Segurança de Redes', desc: 'Como proteger e monitorizar uma rede. Firewall, controlo de acesso e boas práticas de segurança.' },
+    ],
+    tags: ['CCNA Prep', 'Cisco', 'Switches', 'Routers', 'TCP/IP', 'Firewall', 'VLANs', 'Cabeamento'],
+  },
+  frontend: {
+    isNew: false,
+    icon: 'bi-code-slash',
+    title: 'Programador Frontend',
+    subtitle: 'Formação Completa — Do zero ao portfólio',
+    intro: 'Toda empresa quer ter presença na internet. Quem sabe construir páginas web <strong>tem trabalho garantido</strong>. Nesta formação sais a criar sites modernos do zero — com código limpo e visual que impressiona qualquer cliente.',
+    preco: '30.000 KZ',
+    duracao: '2 Meses',
+    aulas: 'Práticas e presenciais',
+    modules: [
+      { num: '01', title: 'HTML5 — A estrutura de tudo', desc: 'Aprendes a estruturar qualquer página web. Tags, formulários, listas, tabelas — a base que nunca muda.' },
+      { num: '02', title: 'CSS3 — O visual que atrai', desc: 'Dás vida ao design. Cores, fontes, layouts responsivos com Flexbox e Grid. O site fica bonito em qualquer ecrã.' },
+      { num: '03', title: 'JavaScript — A lógica por trás', desc: 'Aqui o site começa a interagir. Botões que fazem coisas, validações, animações, requisições. O salto para o próximo nível.' },
+      { num: '04', title: 'Bootstrap — Velocidade no trabalho', desc: 'Framework CSS que te dá componentes prontos. Crias páginas profissionais em muito menos tempo.' },
+      { num: '05', title: 'Git e GitHub — Trabalho em equipa', desc: 'Controlo de versões e colaboração. Sabes guardar o teu código, recuperar versões e trabalhar em equipa como os profissionais.' },
+    ],
+    tags: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap', 'Git', 'GitHub', 'Responsive Design', 'Flexbox'],
+  },
+  laravel: {
+    isNew: false,
+    icon: 'bi-gear-wide-connected',
+    title: 'Laravel',
+    subtitle: 'Formação Completa — Desenvolvedor de alto nível',
+    intro: 'Laravel é uma das frameworks mais usadas no mundo para criar sistemas web completos. Se queres desenvolver plataformas, sistemas de gestão, ou apps web com backend a sério, <strong>este é o caminho certo</strong>.',
+    preco: '40.000 KZ',
+    duracao: '2 Meses',
+    aulas: 'Práticas e presenciais',
+    modules: [
+      { num: '01', title: 'Fundamentos PHP e Laravel', desc: 'Começas do zero no PHP e entras no Laravel com calma. Rotas, controllers, views — a arquitectura que sustenta tudo.' },
+      { num: '02', title: 'Base de Dados com Eloquent e Migrations', desc: 'Crias e geres bases de dados de forma elegante. Eloquent ORM deixa o código limpo e as migrations organizam tudo.' },
+      { num: '03', title: 'Autenticação e Segurança', desc: 'Sistema de login, registo, perfis de utilizador. O teu sistema fica protegido desde o início.' },
+      { num: '04', title: 'Projetos Reais', desc: 'Não sais com exercícios fictícios. Desenvolves aplicações completas para o teu portfólio — algo que podes mostrar a um empregador amanhã.' },
+    ],
+    tags: ['PHP', 'Laravel', 'Eloquent', 'MySQL', 'APIs', 'MVC', 'Autenticação', 'Portfólio'],
+  },
+  dados: {
+    isNew: false,
+    icon: 'bi-database',
+    title: 'Base de Dados',
+    subtitle: 'Formação Completa — SQL e gestão de dados',
+    intro: 'Dados são o recurso mais valioso de qualquer organização. <strong>Quem sabe gerir bases de dados trabalha em bancos, telecoms, governo e empresas privadas.</strong> Nesta formação aprendes a criar, consultar e proteger bases de dados de forma profissional.',
+    preco: '30.000 KZ',
+    duracao: '2 Meses',
+    aulas: 'Práticas e presenciais',
+    modules: [
+      { num: '01', title: 'Fundamentos de Banco de Dados', desc: 'O que é uma base de dados, tipos de sistemas (SGBD), e como pensar em dados de forma estruturada. Base sólida antes de qualquer ferramenta.' },
+      { num: '02', title: 'Modelagem de Dados', desc: 'Aprendes a desenhar a estrutura de uma base de dados antes de a criar. Diagramas ER, entidades, atributos e relacionamentos.' },
+      { num: '03', title: 'Linguagem SQL e Consultas', desc: 'O coração do curso. SELECT, INSERT, UPDATE, DELETE — e muito mais. Fazes consultas complexas com joins, filtros e agrupamentos.' },
+      { num: '04', title: 'Normalização e Relacionamentos', desc: 'Organizas os dados para evitar redundâncias e inconsistências. Base de dados limpa, rápida e confiável.' },
+      { num: '05', title: 'Backup, Segurança e Boas Práticas', desc: 'Garantir que os dados não se perdem e estão protegidos. Rotinas de backup, permissões de acesso e auditoria.' },
+    ],
+    tags: ['SQL', 'MySQL', 'PostgreSQL', 'Modelagem', 'Normalização', 'Backup', 'Segurança', 'SGBD'],
+  },
+  informatica: {
+    isNew: false,
+    icon: 'bi-pc-display',
+    title: 'Informática na Óptica do Utilizador',
+    subtitle: 'Formação Completa — Office + IA aplicada',
+    intro: 'Hoje em dia, saber usar o computador bem <strong>é um requisito básico em quase qualquer emprego</strong>. Nesta formação aprendes as ferramentas que aparecem em todos os escritórios de Angola — e ainda dás um passo à frente com IA.',
+    preco: '30.000 KZ',
+    duracao: '2 Meses',
+    aulas: 'Práticas e presenciais',
+    modules: [
+      { num: '01', title: 'Utilização do Windows', desc: 'Gestão de ficheiros, atalhos, configurações do sistema. Trabalhas com o Windows como um profissional — sem perder tempo com coisas básicas.' },
+      { num: '02', title: 'Microsoft Word', desc: 'Criação de documentos profissionais, relatórios, cartas e tabelas. Formatos, estilos e como poupar horas de trabalho.' },
+      { num: '03', title: 'Microsoft Excel', desc: 'Folhas de cálculo, fórmulas, gráficos e tabelas dinâmicas. Ferramenta essencial em qualquer empresa angolana.' },
+      { num: '04', title: 'PowerPoint e Google Docs', desc: 'Apresentações visuais que convencem. E os documentos online que cada vez mais empresas adoptam no dia-a-dia.' },
+      { num: '05', title: 'Conceito sobre Inteligência Artificial', desc: 'Uma introdução prática ao que a IA pode fazer pelo teu trabalho — ferramentas, exemplos e como não ficar para trás.' },
+    ],
+    tags: ['Windows', 'Word', 'Excel', 'PowerPoint', 'Google Docs', 'IA', 'Produtividade', 'Office'],
+  },
+};
+
+/* ── MODAL LOGIC ── */
+function openModal(id) {
+  const c = courses[id];
+  const overlay = document.getElementById('modalOverlay');
+  const box = document.getElementById('modalBox');
+
+  // toggle new style
+  box.classList.toggle('is-new', !!c.isNew);
+
+  document.getElementById('mEmoji').innerHTML = `<i class="bi ${c.icon}"></i>`;
+  document.getElementById('mTitle').textContent = c.title;
+  document.getElementById('mSubtitle').textContent = c.subtitle;
+  document.getElementById('mIntro').innerHTML = c.intro;
+
+  // info chips
+  document.getElementById('mInfoRow').innerHTML = `
+    <div class="info-chip">
+      <span class="ic-label">Investimento</span>
+      <span class="ic-val">${c.preco}</span>
+    </div>
+    <div class="info-chip">
+      <span class="ic-label">Duração</span>
+      <span class="ic-val blue">${c.duracao}</span>
+    </div>
+    <div class="info-chip">
+      <span class="ic-label">Modalidade</span>
+      <span class="ic-val blue" style="font-size:.9rem;font-family:'Outfit',sans-serif;font-weight:600;">${c.aulas}</span>
+    </div>
+  `;
+
+  // modules
+  document.getElementById('mModules').innerHTML = c.modules.map(m => `
+    <div class="module-item">
+      <span class="mod-num">${m.num}</span>
+      <div class="mod-content">
+        <h4>${m.title}</h4>
+        <p>${m.desc}</p>
+      </div>
+    </div>
+  `).join('');
+
+  // tags
+  document.getElementById('mTags').innerHTML = c.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
+
+  // open
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  box.scrollTop = 0;
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
