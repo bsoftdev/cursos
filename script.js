@@ -78,7 +78,7 @@ const courses = {
 
 
 django: {
-  isNew: false,
+  isNew: true,
   icon: 'bi-code-slash',
   title: 'Python + Django',
   subtitle: 'Formação Completa — Desenvolvedor Web Profissional',
